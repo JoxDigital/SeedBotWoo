@@ -56,8 +56,8 @@ function seedbot_woocommerce_field_cb() {
 }
 
 add_action('admin_init', 'seedbot_register_woocommerce_settings');
-add_action('admin_menu', 'seedbot_add_woocommerce_options_page');
+// add_action('admin_menu', 'seedbot_add_woocommerce_options_page');
 
-function seedbot_add_woocommerce_options_page() {
-    add_submenu_page('seedbot-settings', 'WooCommerce Options', 'WooCommerce Options', 'manage_options', 'seedbot-woocommerce-options', 'seedbot_woocommerce_options_page');
-}
+// function seedbot_add_woocommerce_options_page() {
+//     add_submenu_page('seedbot-settings', 'WooCommerce Options', 'WooCommerce Options', 'manage_options', 'seedbot-woocommerce-options', 'seedbot_woocommerce_options_page');
+// }
