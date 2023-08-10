@@ -36,25 +36,24 @@ function seedbot_admin_menu() {
 
     add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function);
 
-    // Add a submenu under SeedBot settings
-    $submenu_title = 'Submenu Page';
-    $submenu_slug = 'seedbot-submenu';
-    $submenu_function = 'seedbot_submenu_page';
+    // Add a submenu under SeedBot settings for WooCommerce Options
+    $submenu_title = 'WooCommerce Settings';
+    $submenu_slug = 'seedbot-woocommerce';
+    $submenu_function = 'seedbot_woocommerce_settings_page';
 
     add_submenu_page($parent_slug, $page_title, $submenu_title, $capability, $submenu_slug, $submenu_function);
 }
 add_action('admin_menu', 'seedbot_admin_menu');
 
-// Submenu page callback
-function seedbot_submenu_page() {
+// WooCommerce Options page callback
+function seedbot_woocommerce_settings_page() {
     ?>
     <div class="wrap">
-        <h1>SeedBot Submenu Page</h1>
-        <p>This is a submenu page under SeedBot settings.</p>
+        <h1>SeedBot WooCommerce Settings</h1>
+        <p>This is the WooCommerce Options page under SeedBot settings.</p>
     </div>
     <?php
 }
-
 
 // Settings page callback
 function seedbot_settings_page() {
@@ -132,4 +131,3 @@ function seedbot_test_api_connection() {
 
     wp_die(); // Required to terminate the AJAX request
 }
-
