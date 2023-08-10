@@ -27,7 +27,7 @@ add_action('wp_enqueue_scripts', 'seedbot_enqueue_scripts');
 
 // Include admin settings pages
 require_once plugin_dir_path(__FILE__) . 'admin-settings/api-key-settings.php';
-// require_once plugin_dir_path(__FILE__) . 'admin-settings/woocommerce-options.php';
+require_once plugin_dir_path(__FILE__) . 'admin-settings/woocommerce-options.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/bot-styling.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/performance-analytics.php';
 
