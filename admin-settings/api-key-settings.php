@@ -1,5 +1,8 @@
 <?php
-// Check if pae is accessed directly
+
+// admin-settings/api-key-settings.php
+
+// Check if page is accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -51,12 +54,16 @@ function seedbot_api_key_field_callback() {
     $api_key = get_option('seedbot_api_key');
     echo '<input type="text" name="seedbot_api_key" value="' . esc_attr($api_key) . '" />';
     echo '<button id="seedbot-test-api" class="button">Test API Connection</button>';
-    echo '<p id="seedbot-test-response"></p>';
+    echo '<p id="seedbot-test-response"></p>'; // Empty paragraph for displaying response
 }
 
 // Enqueue scripts
 function seedbot_enqueue_admin_scripts() {
     wp_enqueue_script('jquery');
     wp_enqueue_script('seedbot-admin-script', plugin_dir_url(__FILE__) . 'js/seedbot-admin.js', array('jquery'), '1.0', true);
+    // Pass the AJAX URL to the script
+    wp_localize_script('seedbot-admin-script', 'seedbotAdmin', array(
+        'ajax_url' => admin_url('admin-ajax.php')
+    ));
 }
 add_action('admin_enqueue_scripts', 'seedbot_enqueue_admin_scripts');
