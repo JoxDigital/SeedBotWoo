@@ -15,6 +15,8 @@ jQuery(document).ready(function($) {
                 $('#seedbot-test-response').text(response);
                 if (response.indexOf('failed') !== -1) {
                     $('#seedbot-test-response').addClass('seedbot-error');
+                    console.log('test ffail');
+
                 } else {
                     $('#seedbot-test-response').removeClass('seedbot-error');
                 }
