@@ -11,6 +11,7 @@ jQuery(document).ready(function ($) {
             },
             success: function (response) {
                 $('#seedbot-test-response').text('API connection successful!');
+                console.log('test ffail');
             },
             error: function () {
                 $('#seedbot-test-response').text('API connection failed.');
