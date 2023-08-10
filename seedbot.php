@@ -25,6 +25,12 @@ function seedbot_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'seedbot_enqueue_scripts');
 
+// Include admin settings pages
+require_once plugin_dir_path(__FILE__) . 'admin-settings/api-key-settings.php';
+require_once plugin_dir_path(__FILE__) . 'admin-settings/woocommerce-options.php';
+require_once plugin_dir_path(__FILE__) . 'admin-settings/bot-styling.php';
+require_once plugin_dir_path(__FILE__) . 'admin-settings/performance-analytics.php';
+
 // Create admin menu
 function seedbot_admin_menu() {
     $parent_slug = 'seedbot-settings';
@@ -36,24 +42,81 @@ function seedbot_admin_menu() {
 
     add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function);
 
-    // Add a submenu under SeedBot settings for WooCommerce Options
-    $submenu_title = 'WooCommerce Settings';
-    $submenu_slug = 'seedbot-woocommerce';
-    $submenu_function = 'seedbot_woocommerce_settings_page';
+    // Add submenus for SeedBot settings
+    $submenu_title = 'API Key';
+    $submenu_slug = 'seedbot-settings';
+    $submenu_function = 'seedbot_settings_page';
+
+    add_submenu_page($parent_slug, $page_title, $submenu_title, $capability, $submenu_slug, $submenu_function);
+
+    $submenu_title = 'WooCommerce Options';
+    $submenu_slug = 'seedbot-woocommerce-options';
+    $submenu_function = 'seedbot_woocommerce_options_page';
+
+    add_submenu_page($parent_slug, $page_title, $submenu_title, $capability, $submenu_slug, $submenu_function);
+
+    $submenu_title = 'Bot Styling';
+    $submenu_slug = 'seedbot-bot-styling';
+    $submenu_function = 'seedbot_bot_styling_page';
+
+    add_submenu_page($parent_slug, $page_title, $submenu_title, $capability, $submenu_slug, $submenu_function);
+
+    $submenu_title = 'Performance Analytics';
+    $submenu_slug = 'seedbot-performance-analytics';
+    $submenu_function = 'seedbot_performance_analytics_page';
 
     add_submenu_page($parent_slug, $page_title, $submenu_title, $capability, $submenu_slug, $submenu_function);
 }
 add_action('admin_menu', 'seedbot_admin_menu');
 
 // WooCommerce Options page callback
-function seedbot_woocommerce_settings_page() {
+function seedbot_woocommerce_options_page() {
     ?>
     <div class="wrap">
-        <h1>SeedBot WooCommerce Settings</h1>
+        <h1>SeedBot WooCommerce Options</h1>
         <p>This is the WooCommerce Options page under SeedBot settings.</p>
+        <h2 class="nav-tab-wrapper">
+            <a href="?page=seedbot-settings" class="nav-tab">API Key</a>
+            <a href="?page=seedbot-woocommerce-options" class="nav-tab nav-tab-active">WooCommerce Options</a>
+            <a href="?page=seedbot-bot-styling" class="nav-tab">Bot Styling</a>
+            <a href="?page=seedbot-performance-analytics" class="nav-tab">Performance Analytics</a>
+        </h2>
     </div>
     <?php
 }
+
+// Bot Styling page callback
+function seedbot_bot_styling_page() {
+    ?>
+    <div class="wrap">
+        <h1>SeedBot Bot Styling</h1>
+        <p>This is the Bot Styling page under SeedBot settings.</p>
+        <h2 class="nav-tab-wrapper">
+            <a href="?page=seedbot-settings" class="nav-tab">API Key</a>
+            <a href="?page=seedbot-woocommerce-options" class="nav-tab">WooCommerce Options</a>
+            <a href="?page=seedbot-bot-styling" class="nav-tab nav-tab-active">Bot Styling</a>
+            <a href="?page=seedbot-performance-analytics" class="nav-tab">Performance Analytics</a>
+        </h2>
+    </div>
+    <?php
+}
+
+// Performance Analytics page callback
+function seedbot_performance_analytics_page() {
+    ?>
+    <div class="wrap">
+        <h1>SeedBot Performance Analytics</h1>
+        <p>This is the Performance Analytics page under SeedBot settings.</p>
+        <h2 class="nav-tab-wrapper">
+            <a href="?page=seedbot-settings" class="nav-tab">API Key</a>
+            <a href="?page=seedbot-woocommerce-options" class="nav-tab">WooCommerce Options</a>
+            <a href="?page=seedbot-bot-styling" class="nav-tab">Bot Styling</a>
+            <a href="?page=seedbot-performance-analytics" class="nav-tab nav-tab-active">Performance Analytics</a>
+        </h2>
+    </div>
+    <?php
+}
+
 
 // Settings page callback
 function seedbot_settings_page() {
