@@ -117,7 +117,6 @@ function seedbot_performance_analytics_page() {
     <?php
 }
 
-
 // Settings page callback
 function seedbot_settings_page() {
     ?>
@@ -143,16 +142,15 @@ function seedbot_settings_page() {
             } elseif ($current_tab === 'seedbot-performance-analytics') {
                 seedbot_performance_analytics_page();
             } else {
-                seedbot_api_key_page(); // Display the API Key content
+                seedbot_api_key_settings_page(); // Display the API Key content
             }
         } else {
-            seedbot_api_key_page(); // Display the API Key content as default
+            seedbot_api_key_settings_page(); // Display the API Key content as default
         }
         ?>
     </div>
     <?php
 }
-
 
 
 // Register API Key settings
