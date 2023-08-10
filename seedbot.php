@@ -25,7 +25,7 @@ function seedbot_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'seedbot_enqueue_scripts');
 
-// Include admin settings pages toa com
+// Include admin settings pages
 require_once plugin_dir_path(__FILE__) . 'admin-settings/api-key-settings.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/woocommerce-options.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/bot-styling.php';
@@ -68,22 +68,6 @@ function seedbot_admin_menu() {
     add_submenu_page($parent_slug, $page_title, $submenu_title, $capability, $submenu_slug, $submenu_function);
 }
 add_action('admin_menu', 'seedbot_admin_menu');
-
-// WooCommerce Options page callback
-function seedbot_woocommerce_options_page() {
-    ?>
-    <div class="wrap">
-        <h1>SeedBot WooCommerce Options</h1>
-        <p>This is the WooCommerce Options page under SeedBot settings.</p>
-        <h2 class="nav-tab-wrapper">
-            <a href="?page=seedbot-settings" class="nav-tab">API Key</a>
-            <a href="?page=seedbot-woocommerce-options" class="nav-tab nav-tab-active">WooCommerce Options</a>
-            <a href="?page=seedbot-bot-styling" class="nav-tab">Bot Styling</a>
-            <a href="?page=seedbot-performance-analytics" class="nav-tab">Performance Analytics</a>
-        </h2>
-    </div>
-    <?php
-}
 
 // Bot Styling page callback
 function seedbot_bot_styling_page() {
@@ -151,7 +135,6 @@ function seedbot_settings_page() {
     </div>
     <?php
 }
-
 
 // Register API Key settings
 function seedbot_register_settings() {
