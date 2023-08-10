@@ -25,7 +25,7 @@ function seedbot_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'seedbot_enqueue_scripts');
 
-// Include admin settings pages
+// Include admin settings pages toa com
 require_once plugin_dir_path(__FILE__) . 'admin-settings/api-key-settings.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/woocommerce-options.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/bot-styling.php';
@@ -68,6 +68,7 @@ function seedbot_admin_menu() {
     add_submenu_page($parent_slug, $page_title, $submenu_title, $capability, $submenu_slug, $submenu_function);
 }
 add_action('admin_menu', 'seedbot_admin_menu');
+
 
 // Bot Styling page callback
 function seedbot_bot_styling_page() {
@@ -190,3 +191,44 @@ function seedbot_test_api_connection() {
 
     wp_die(); // Required to terminate the AJAX request
 }
+
+// Function to display product filtering options
+function seedbot_woocommerce_product_filter_options() {
+    ?>
+    <h2>Product Filtering Options</h2>
+    <table class="form-table">
+        <tr valign="top">
+            <th scope="row">Minimum Price:</th>
+            <td><input type="text" name="seedbot_min_price" value="<?php echo esc_attr(get_option('seedbot_min_price', '')); ?>" /></td>
+        </tr>
+        <tr valign="top">
+            <th scope="row">Maximum Price:</th>
+            <td><input type="text" name="seedbot_max_price" value="<?php echo esc_attr(get_option('seedbot_max_price', '')); ?>" /></td>
+        </tr>
+        <tr valign="top">
+            <th scope="row">Category:</th>
+            <td>
+                <?php
+                $categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => false));
+                if ($categories) {
+                    echo '<select name="seedbot_product_category">';
+                    echo '<option value="">Select Category</option>';
+                    foreach ($categories as $category) {
+                        echo '<option value="' . esc_attr($category->term_id) . '">' . esc_html($category->name) . '</option>';
+                    }
+                    echo '</select>';
+                }
+                ?>
+            </td>
+        </tr>
+    </table>
+    <?php
+}
+
+// Register product filtering settings
+function seedbot_register_product_filter_settings() {
+    register_setting('seedbot-woocommerce', 'seedbot_min_price', 'intval');
+    register_setting('seedbot-woocommerce', 'seedbot_max_price', 'intval');
+    register_setting('seedbot-woocommerce', 'seedbot_product_category', 'intval');
+}
+add_action('admin_init', 'seedbot_register_product_filter_settings');

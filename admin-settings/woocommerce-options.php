@@ -1,12 +1,38 @@
 <?php
+// Check if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 function seedbot_woocommerce_options_page() {
     ?>
-    <div class="wrap">
+        <div class="wrap">
+        <h1>SeedBot WooCommerce Options</h1>
+        <p>This is the WooCommerce Options page under SeedBot settings.</p>
+        <h2 class="nav-tab-wrapper">
+            <a href="?page=seedbot-settings" class="nav-tab">API Key</a>
+            <a href="?page=seedbot-woocommerce-options" class="nav-tab nav-tab-active">WooCommerce Options</a>
+            <a href="?page=seedbot-bot-styling" class="nav-tab">Bot Styling</a>
+            <a href="?page=seedbot-performance-analytics" class="nav-tab">Performance Analytics</a>
+        </h2>
         <h2>WooCommerce Options</h2>
         <form method="post" action="options.php">
             <?php
             settings_fields('seedbot-woocommerce');
             do_settings_sections('seedbot-woocommerce');
+            submit_button();
+            ?>
+        </form>
+
+         <!-- New section for product filtering options -->
+         <form method="post" action="options.php">
+            <?php
+            settings_fields('seedbot-woocommerce');
+            do_settings_sections('seedbot-woocommerce');
+
+            // Call the function to display product filtering options
+            seedbot_woocommerce_product_filter_options();
+
             submit_button();
             ?>
         </form>
