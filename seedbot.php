@@ -49,7 +49,7 @@ function seedbot_admin_menu() {
 
     add_submenu_page($parent_slug, $page_title, $submenu_title, $capability, $submenu_slug, $submenu_function);
 
-    $submenu_title = 'WooCommerce Options';
+    $submenu_title = 'WooCommerce';
     $submenu_slug = 'seedbot-woocommerce-options';
     $submenu_function = 'seedbot_woocommerce_options_page';
 
@@ -61,7 +61,7 @@ function seedbot_admin_menu() {
 
     add_submenu_page($parent_slug, $page_title, $submenu_title, $capability, $submenu_slug, $submenu_function);
 
-    $submenu_title = 'Performance Analytics';
+    $submenu_title = 'Analytics';
     $submenu_slug = 'seedbot-performance-analytics';
     $submenu_function = 'seedbot_performance_analytics_page';
 

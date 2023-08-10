@@ -21,7 +21,7 @@ function seedbot_woocommerce_options_page() {
             settings_fields('seedbot-woocommerce');
             do_settings_sections('seedbot-woocommerce');
             submit_button();
-            ?>
+            ?>fox
         </form>
 
          <!-- New section for product filtering options -->

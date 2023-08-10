@@ -1,3 +1,4 @@
+<script>
 jQuery(document).ready(function ($) {
     // API Test button click event
     $('#seedbot-test-api').on('click', function () {
@@ -17,3 +18,5 @@ jQuery(document).ready(function ($) {
         });
     });
 });
+
+</script>
