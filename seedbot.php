@@ -84,12 +84,25 @@ function seedbot_test_api_connection() {
 
     // Perform the API connection test
     // Call OpenAI API with the provided API key and check the response
-    // Return appropriate response message based on success or failure
+    // Replace the following placeholder logic with the actual API connection test
 
-    if (/* API connection test succeeds */) {
-        echo 'API connection successful!';
-    } else {
+    $api_url = 'https://api.openai.com/v1/your-endpoint'; // Replace with the actual API endpoint
+
+    $response = wp_safe_remote_get($api_url, array(
+        'headers' => array(
+            'Authorization' => 'Bearer ' . $api_key
+        )
+    ));
+
+    if (is_wp_error($response)) {
         echo 'API connection failed. Please check your API key.';
+    } else {
+        $response_code = wp_remote_retrieve_response_code($response);
+        if ($response_code === 200) {
+            echo 'API connection successful!';
+        } else {
+            echo 'API connection failed. Please check your API key.';
+        }
     }
 
     wp_die(); // Required to terminate the AJAX request
