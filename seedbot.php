@@ -126,17 +126,28 @@ function seedbot_settings_page() {
         <?php settings_errors(); ?>
 
         <h2 class="nav-tab-wrapper">
-            <a href="?page=seedbot-settings" class="nav-tab nav-tab-active">API Key</a>
-            <a href="?page=seedbot-woocommerce" class="nav-tab">WooCommerce Options</a>
+            <a href="?page=seedbot-settings" class="nav-tab <?php echo (isset($_GET['page']) && $_GET['page'] === 'seedbot-settings') ? 'nav-tab-active' : ''; ?>">API Key</a>
+            <a href="?page=seedbot-woocommerce-options" class="nav-tab <?php echo (isset($_GET['page']) && $_GET['page'] === 'seedbot-woocommerce-options') ? 'nav-tab-active' : ''; ?>">WooCommerce Options</a>
+            <a href="?page=seedbot-bot-styling" class="nav-tab <?php echo (isset($_GET['page']) && $_GET['page'] === 'seedbot-bot-styling') ? 'nav-tab-active' : ''; ?>">Bot Styling</a>
+            <a href="?page=seedbot-performance-analytics" class="nav-tab <?php echo (isset($_GET['page']) && $_GET['page'] === 'seedbot-performance-analytics') ? 'nav-tab-active' : ''; ?>">Performance Analytics</a>
         </h2>
 
-        <form method="post" action="options.php">
-            <?php
-            settings_fields('seedbot-api-key');
-            do_settings_sections('seedbot-api-key');
-            submit_button();
-            ?>
-        </form>
+        <?php
+        // Display the content of the current tab
+        if (isset($_GET['page'])) {
+            $current_tab = sanitize_text_field($_GET['page']);
+            if ($current_tab === 'seedbot-woocommerce-options') {
+                seedbot_woocommerce_options_page();
+            } elseif ($current_tab === 'seedbot-bot-styling') {
+                seedbot_bot_styling_page();
+            } elseif ($current_tab === 'seedbot-performance-analytics') {
+                seedbot_performance_analytics_page();
+            } else {
+                // Default to API Key tab if none of the tabs match
+                seedbot_api_key_page();
+            }
+        }
+        ?>
     </div>
     <?php
 }
