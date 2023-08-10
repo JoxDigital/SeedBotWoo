@@ -27,7 +27,7 @@ add_action('wp_enqueue_scripts', 'seedbot_enqueue_scripts');
 
 // Create admin menu
 function seedbot_admin_menu() {
-    add_menu_page('SeedBot Settings', 'SeedBot', 'manage_options', 'seedbot-settings', 'seedbot_settings_page');
+    add_menu_page('SeedBot Settings', 'SeedBot', 'read', 'seedbot-settings', 'seedbot_settings_page');
 }
 add_action('admin_menu', 'seedbot_admin_menu');
 
