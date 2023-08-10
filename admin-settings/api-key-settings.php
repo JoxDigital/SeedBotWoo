@@ -1,5 +1,5 @@
 <?php
-// Check if accessed directly
+// Check if pae is accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
