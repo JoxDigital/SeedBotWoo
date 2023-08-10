@@ -3,6 +3,9 @@ jQuery(document).ready(function($) {
         e.preventDefault();
 
         var apiKey = $('input[name="seedbot_api_key"]').val();
+        var apiEndpoint = '<?php echo esc_js($api_url); ?>'; // Get the API endpoint URL from PHP
+
+        console.log('API Endpoint:', apiEndpoint); // Add this line to log the API endpoint
 
         $.ajax({
             type: 'POST',
@@ -20,4 +23,3 @@ jQuery(document).ready(function($) {
         });
     });
 });
-
