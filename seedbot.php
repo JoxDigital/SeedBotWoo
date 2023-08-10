@@ -27,9 +27,34 @@ add_action('wp_enqueue_scripts', 'seedbot_enqueue_scripts');
 
 // Create admin menu
 function seedbot_admin_menu() {
-    add_menu_page('SeedBot Settings', 'SeedBot', 'read', 'seedbot-settings', 'seedbot_settings_page');
+    $parent_slug = 'seedbot-settings';
+    $page_title = 'SeedBot Settings';
+    $menu_title = 'SeedBot';
+    $capability = 'read';
+    $menu_slug = 'seedbot-settings';
+    $function = 'seedbot_settings_page';
+
+    add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function);
+
+    // Add a submenu under SeedBot settings
+    $submenu_title = 'Submenu Page';
+    $submenu_slug = 'seedbot-submenu';
+    $submenu_function = 'seedbot_submenu_page';
+
+    add_submenu_page($parent_slug, $page_title, $submenu_title, $capability, $submenu_slug, $submenu_function);
 }
 add_action('admin_menu', 'seedbot_admin_menu');
+
+// Submenu page callback
+function seedbot_submenu_page() {
+    ?>
+    <div class="wrap">
+        <h1>SeedBot Submenu Page</h1>
+        <p>This is a submenu page under SeedBot settings.</p>
+    </div>
+    <?php
+}
+
 
 // Settings page callback
 function seedbot_settings_page() {
