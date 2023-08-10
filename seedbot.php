@@ -110,7 +110,7 @@ function seedbot_test_api_connection() {
     // Call OpenAI API with the provided API key and check the response
     // Replace the following placeholder logic with the actual API connection test
 
-    $api_url = 'https://api.openai.com/v1/your-endpoint'; // Replace with the actual API endpoint
+    $api_url = 'https://api.openai.com/v1/chat/completions'; // Replace with the actual API endpoint
 
     $response = wp_safe_remote_get($api_url, array(
         'headers' => array(
