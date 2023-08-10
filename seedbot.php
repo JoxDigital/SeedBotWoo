@@ -136,6 +136,7 @@ function seedbot_settings_page() {
     <?php
 }
 
+
 // Register API Key settings
 function seedbot_register_settings() {
     register_setting('seedbot-api-key', 'seedbot_api_key');
