@@ -6,25 +6,18 @@ jQuery(document).ready(function($) {
 
         $.ajax({
             type: 'POST',
-            url: seedbotAdmin.ajax_url, // Use the localized AJAX URL
+            url: ajaxurl, // WordPress AJAX handler URL
             data: {
                 action: 'seedbot_test_api_connection',
                 api_key: apiKey
             },
             success: function(response) {
                 $('#seedbot-test-response').text(response);
-                if (response.indexOf('failed') !== -1) {
-                    $('#seedbot-test-response').addClass('seedbot-error');
-                    console.log('test ffail');
-
-                } else {
-                    $('#seedbot-test-response').removeClass('seedbot-error');
-                }
             },
-            error: function() {
-                $('#seedbot-test-response').text('An error occurred. Please try again.');
-                $('#seedbot-test-response').addClass('seedbot-error');
+            error: function(xhr, textStatus, errorThrown) {
+                $('#seedbot-test-response').text('Error: ' + textStatus + ' - ' + errorThrown);
             }
         });
     });
 });
+
