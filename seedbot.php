@@ -30,7 +30,7 @@ require_once plugin_dir_path(__FILE__) . 'admin-settings/api-key-settings.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/woocommerce-options.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/bot-styling.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/performance-analytics.php';
-require_once plugin_dir_path(__FILE__) . 'includes/seedbot-shortcode.php';
+// require_once plugin_dir_path(__FILE__) . 'includes/seedbot-shortcode.php';
 require_once plugin_dir_path(__FILE__) . 'includes/seedbot-chat-interface.php';
 
 // Create admin menu
