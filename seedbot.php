@@ -16,7 +16,7 @@ function seedbot_enqueue_scripts() {
 
     // Enqueue SeedBot script
     wp_enqueue_script('seedbot-script', plugin_dir_url(__FILE__) . 'assets/js/seedbot.js', array('jquery'), '1.0', true);
-    wp_enqueue_script('seedbot-admin-script', plugin_dir_url(__FILE__) . 'assets/js/seedbot-admin.js', array('jquery'), '1.0', true);
+    wp_enqueue_script( 'seedbot-admin', plugin_dir_url( __FILE__ ) . 'admin-settings/js/seedbot-admin.js', array( 'jquery' ), '1.0', true );
 
     // Localize the script with the API URL
     wp_localize_script('seedbot-admin-script', 'seedbotAdmin', array(
