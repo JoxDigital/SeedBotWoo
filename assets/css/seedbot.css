@@ -40,8 +40,7 @@
     }
 
     #seedbot-name {
-        flex: auto;
-        background-color: red;
+        flex: 1;
     }
 
     .seedbot-options {
