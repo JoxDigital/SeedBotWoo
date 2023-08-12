@@ -8,7 +8,7 @@ ob_start();
     <div id="seedbot-chat-container" class="seedbot-chat-container">
         <div class="seedbot-chat-header" id="seedbot-chat-header">
             <div id="seedbot-title">
-                <div id="seedbot-avatar">
+                <div id="seedbot-avatar" class="seedbot-avatar">
                     <img src="https://dev.joxdigital.com/wp-content/uploads/2023/08/seedbotavatar-scaled-1.png" alt="ChatBot Avatar"/>
                 </div>
                 <div id="seedbot-name"></div>
