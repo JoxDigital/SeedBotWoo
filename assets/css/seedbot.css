@@ -34,10 +34,9 @@
         flex-wrap: nowrap;
     }
 
-    #seedbot-avatar {
-        width: 100px;
+    #seedbot-avatar img {
+        width: 50px;
         aspect-ratio: 1/1;
-        background-image: url(https://dev.joxdigital.com/wp-content/uploads/2023/08/seedbotavatar-scaled100.png);
     }
 
     #seedbot-name {
