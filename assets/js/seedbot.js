@@ -19,9 +19,9 @@ jQuery(document).ready(function ($) {
     });
 
     // Chat interface logic
-    const chatMessages = document.getElementById('chat-messages');
-    const userMessageInput = document.getElementById('user-message');
-    const sendButton = document.getElementById('send-button');
+    const chatMessages = document.getElementById('seedbot-chat-messages');
+    const userMessageInput = document.getElementById('seedbot-user-message');
+    const sendButton = document.getElementById('seedbot-send-button');
 
     sendButton.addEventListener('click', function () {
         const userMessage = userMessageInput.value;
@@ -36,7 +36,7 @@ jQuery(document).ready(function ($) {
 
     function appendUserMessage(message) {
         const messageElement = document.createElement('div');
-        messageElement.classList.add('user-message');
+        messageElement.classList.add('seedbot--message');
         messageElement.textContent = message;
         chatMessages.appendChild(messageElement);
         userMessageInput.value = '';
