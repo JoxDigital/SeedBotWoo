@@ -5,7 +5,7 @@
 ob_start();
 ?>
 <div id="seedbot-chat-interface" class="seedbot-chat-interface">
-    <div class="seedbot-chat-container">
+    <div id="seedbot-chat-container" class="seedbot-chat-container">
         <div class="seedbot-chat-header" id="seedbot-chat-header">
             <div id="seedbot-title">
                 <div id="seedbot-avatar">
