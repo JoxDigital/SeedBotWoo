@@ -6,7 +6,7 @@
         margin: 0 auto;
     }
 
-    .chat-container {
+    .seedbot-chat-container {
         background-color: #fff;
         border-radius: 10px;
         padding: 10px;
@@ -16,22 +16,44 @@
         margin-bottom: 10px;
     }
 
-    .chat-messages {
+    #seedbot-chat-header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #seedbot-title {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    #seedbot-avatar {
+        width: 100px;
+        aspect-ratio: 1/1;
+        background-image: url(https://dev.joxdigital.com/wp-content/uploads/2023/08/seedbotavatar-scaled100.png);
+    }
+
+    #seedbot-name {
+        flex: auto;
+        background-color: red;
+    }
+
+    .seedbot-chat-messages {
         margin-bottom: 10px;
     }
 
-    .user-input {
+    .seedbot-user-input {
         display: flex;
     }
 
-    #user-message {
+    #seedbot-user-message {
         flex: 1;
         padding: 5px;
         border: 1px solid #ccc;
         border-radius: 5px;
     }
 
-    #send-button {
+    #seedbot-send-button {
         padding: 5px 10px;
         border: none;
         background-color: #4caf50;

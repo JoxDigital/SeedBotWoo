@@ -36,7 +36,7 @@ jQuery(document).ready(function ($) {
 
     function appendUserMessage(message) {
         const messageElement = document.createElement('div');
-        messageElement.classList.add('seedbot--message');
+        messageElement.classList.add('seedbot-user-message');
         messageElement.textContent = message;
         chatMessages.appendChild(messageElement);
         userMessageInput.value = '';
