@@ -30,8 +30,8 @@ require_once plugin_dir_path(__FILE__) . 'admin-settings/api-key-settings.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/woocommerce-options.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/bot-styling.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/performance-analytics.php';
-// require_once plugin_dir_path(__FILE__) . 'includes/seedbot-shortcode.php';
-require_once plugin_dir_path(__FILE__) . 'includes/seedbot-chat-interface.php';
+require_once plugin_dir_path(__FILE__) . 'includes/seedbot-shortcode.php';
+// require_once plugin_dir_path(__FILE__) . 'includes/seedbot-chat-interface.php';
 
 // Create admin menu
 function seedbot_admin_menu() {
@@ -235,3 +235,16 @@ function seedbot_register_product_filter_settings() {
 }
 add_action('admin_init', 'seedbot_register_product_filter_settings');
 
+// Shortcode to load chatbot
+function seedbot_chat_interface_shortcode() {
+    ob_start(); // Start output buffering
+
+    // Include the chatbot interface code here
+    include plugin_dir_path(__FILE__) . 'includes/seedbot-chat-interface.php';
+
+    // Get the buffered content
+    $output = ob_get_clean();
+
+    return $output;
+}
+add_shortcode('seedbot_chat_interface', 'seedbot_chat_interface_shortcode');
