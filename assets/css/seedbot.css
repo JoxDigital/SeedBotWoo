@@ -1,4 +1,4 @@
-    .seedbot-chat-interface {
+    #seedbot-chat-interface {
         background-color: #d0e8d5;
         padding: 20px;
         border-radius: 10px;
@@ -10,7 +10,7 @@
         height: 400px;
     }
 
-    .seedbot-chat-container {
+    #seedbot-chat-container {
         background-color: #fff;
         border-radius: 10px;
         padding: 10px;
