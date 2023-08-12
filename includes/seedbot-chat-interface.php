@@ -13,7 +13,7 @@ ob_start();
                 </div>
                 <div id="seedbot-name"><h3>SeedBot AI Helper</h3></div>
             </div>
-            <div id="seedbot-options">
+            <div id="seedbot-options" class="seedbot-options">
                 <div class="seedbot-option">Option 1</div>
                 <div class="seedbot-option">Option Too</div>
                 <div class="seedbot-option">Option 3</div>

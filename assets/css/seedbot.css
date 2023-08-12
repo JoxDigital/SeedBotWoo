@@ -42,6 +42,10 @@
         background-color: red;
     }
 
+    .seedbot-options {
+        display: flex;
+    }
+
     .seedbot-chat-messages {
         margin-bottom: 10px;
     }
