@@ -18,7 +18,8 @@
         position: absolute;
         left: 30px;
         bottom: 30px;
-        min-height: 400px;    }
+        min-height: 400px;    
+    }
 
     #seedbot-chat-header {
         display: flex;
