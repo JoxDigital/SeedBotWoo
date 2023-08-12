@@ -20,7 +20,7 @@ ob_start();
                 <div class="seedbot-option">Option 4</div>
             </div>
         </div>
-        <div class="seedbot-chat-messages" id="seedbot-seedbot-chat-messages">
+        <div class="seedbot-chat-messages" id="seedbot-chat-messages">
             <!-- Chat messages will be appended here -->
         </div>
         <div class="seedbot-user-input">
