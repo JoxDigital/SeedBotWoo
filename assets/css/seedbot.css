@@ -45,6 +45,12 @@
 
     .seedbot-options {
         display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .seedbot-option {
+        flex: 1 1 45%;
     }
 
     .seedbot-input-container {
