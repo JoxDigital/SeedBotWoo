@@ -11,7 +11,7 @@ ob_start();
                 <div id="seedbot-avatar" class="seedbot-avatar">
                     <img src="https://dev.joxdigital.com/wp-content/uploads/2023/08/seedbotavatar-scaled-1.png" alt="ChatBot Avatar"/>
                 </div>
-                <div id="seedbot-name"></div>
+                <div id="seedbot-name"><h3>SeedBot AI Helper</h3></div>
             </div>
             <div id="seedbot-options">
                 <div class="seedbot-option">Option 1</div>
