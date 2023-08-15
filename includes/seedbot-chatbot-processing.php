@@ -14,7 +14,7 @@ if (!empty($user_message)) {
     // Make an API request to OpenAI and get the chatbot response
     $api_url = 'https://api.openai.com/v1/engines/davinci/completions'; // Updated API endpoint
     $payload = json_encode(array(
-        'messages' => array(array('role' => 'user', 'content' => $user_message)),
+        'messages' => array(array('role' => 'system', 'content' => 'You are a helpful assistant.'), array('role' => 'user', 'content' => $user_message)),
     ));
     
     $ch = curl_init($api_url);
