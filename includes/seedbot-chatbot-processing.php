@@ -1,7 +1,7 @@
 <?php
 // Include WordPress core
 define('WP_USE_THEMES', false);
-require_once(ABSPATH . 'wp-load.php'); 
+require_once(ABSPATH . 'wp-load.php');
 
 // Get the user message
 $user_message = isset($_POST['message']) ? sanitize_text_field($_POST['message']) : '';
@@ -11,24 +11,37 @@ if (!empty($user_message)) {
     // Your OpenAI API key
     $api_key = get_option('seedbot_api_key'); // Make sure you have a function to retrieve the API key
 
-    // Make an API request to OpenAI and get the chatbot response
+    // API endpoint
     $api_url = 'https://api.openai.com/v1/engines/davinci/completions'; // Updated API endpoint
-    $response = wp_safe_remote_post($api_url, array(
-        'headers' => array(
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . $api_key,
-        ),
-        'body' => wp_json_encode(array(
-            'messages' => array(
-                array('role' => 'system', 'content' => 'You are a helpful assistant.'),
-                array('role' => 'user', 'content' => $user_message)
-            ),
-        )),
-    ));
 
-    if (!is_wp_error($response)) {
-        $response_body = wp_remote_retrieve_body($response);
-        $response_data = json_decode($response_body, true);
+    // Prepare the data for the API request
+    $data = array(
+        'messages' => array(
+            array('role' => 'system', 'content' => 'You are a helpful assistant.'),
+            array('role' => 'user', 'content' => $user_message)
+        )
+    );
+
+    // Initialize cURL session
+    $ch = curl_init($api_url);
+
+    // Set cURL options
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $api_key
+    ));
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+    // Execute cURL session and get the response
+    $response = curl_exec($ch);
+
+    // Check for cURL errors
+    if (curl_errno($ch)) {
+        echo 'CURL Error: ' . curl_error($ch);
+    } else {
+        $response_data = json_decode($response, true);
 
         // Debugging: Output the full API response
         var_dump($response_data);
@@ -39,9 +52,11 @@ if (!empty($user_message)) {
             : 'Chatbot encountered an issue.';
 
         echo $chatbot_reply;
-    } else {
-        echo 'Chatbot encountered an error.';
     }
+
+    // Close cURL session
+    curl_close($ch);
+} else {
+    echo 'No message provided.';
 }
 ?>
-
