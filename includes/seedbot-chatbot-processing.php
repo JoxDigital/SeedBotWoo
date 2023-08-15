@@ -12,30 +12,34 @@ if (!empty($user_message)) {
     $api_key = get_option('seedbot_api_key'); // Make sure you have a function to retrieve the API key
 
     // Make an API request to OpenAI and get the chatbot response
-    $api_url = 'https://api.openai.com/v1/chat/completions';
-    $response = wp_safe_remote_post($api_url, array(
-        'headers' => array(
-            'Authorization' => 'Bearer ' . $api_key,
-        ),
-        'body' => json_encode(array(
-            'messages' => array(array('role' => 'user', 'content' => $user_message)),
-            'model' => 'gpt-3.5-turbo', // Specify the language model
-        )),
+    $api_url = 'https://api.openai.com/v1/engines/davinci/completions'; // Updated API endpoint
+    $payload = json_encode(array(
+        'messages' => array(array('role' => 'user', 'content' => $user_message)),
+        'model' => 'gpt-4.0', // Specify the language model
     ));
     
+    $ch = curl_init($api_url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $api_key,
+    ));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
 
-    if (!is_wp_error($response)) {
-        $response_body = wp_remote_retrieve_body($response);
-        $response_data = json_decode($response_body, true);
-    
+    if ($response !== false) {
+        $response_data = json_decode($response, true);
+
         // Debugging: Output the full API response
         var_dump($response_data);
-    
+
         // Extract the chatbot's reply from the response and return it
         $chatbot_reply = isset($response_data['choices'][0]['message']['content'])
             ? $response_data['choices'][0]['message']['content']
             : 'Chatbot encountered an issue.';
-    
+
         echo $chatbot_reply;
     } else {
         echo 'Chatbot encountered an error.';
