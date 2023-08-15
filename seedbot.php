@@ -32,6 +32,8 @@ require_once plugin_dir_path(__FILE__) . 'admin-settings/bot-styling.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/performance-analytics.php';
 require_once plugin_dir_path(__FILE__) . 'includes/seedbot-shortcode.php';
 // require_once plugin_dir_path(__FILE__) . 'includes/seedbot-chat-interface.php';
+require_once plugin_dir_path(__FILE__) . 'includes/seedbot-chatbot-processing.php';
+
 
 // Create admin menu
 function seedbot_admin_menu() {
