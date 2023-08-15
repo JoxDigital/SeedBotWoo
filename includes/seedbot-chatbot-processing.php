@@ -1,5 +1,3 @@
-includes/seedbot-chatbot-processing.php
-
 <?php
 // Include WordPress core
 define('WP_USE_THEMES', false);
