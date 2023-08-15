@@ -120,5 +120,5 @@ jQuery(document).ready(function ($) {
     // Bind updateProductList function to change event of filtering inputs
     $('input[name="seedbot_min_price"], input[name="seedbot_max_price"], select[name="seedbot_product_category"]').on('change', function() {
         updateProductList();
-    });
+    });-
 });

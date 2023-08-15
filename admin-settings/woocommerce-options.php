@@ -43,7 +43,6 @@ function seedbot_woocommerce_options_page() {
 function seedbot_register_woocommerce_settings() {
     register_setting('seedbot-woocommerce', 'seedbot_woocommerce_option');
     add_settings_section('seedbot-woocommerce-section', 'WooCommerce Options', 'seedbot_woocommerce_section_cb', 'seedbot-woocommerce');
-    add_settings_field('seedbot-woocommerce-field', 'WooCommerce Option 1', 'seedbot_woocommerce_field_cb', 'seedbot-woocommerce', 'seedbot-woocommerce-section');
 }
 
 function seedbot_woocommerce_section_cb() {

@@ -55,5 +55,33 @@ $('input[name="seedbot_min_price"], input[name="seedbot_max_price"], select[name
     fetchFilteredProducts();
 });
 
+// Add event listeners for real-time product filtering and updates
+$('#seedbot_min_price, #seedbot_max_price, #seedbot_product_category').on('change', function() {
+    updateProductList();
+});
 
+// Function to update the product list in real-time
+function updateProductList() {
+    var minPrice = $('#seedbot_min_price').val();
+    var maxPrice = $('#seedbot_max_price').val();
+    var category = $('#seedbot_product_category').val();
+
+    // AJAX request to update product list
+    $.ajax({
+        url: seedbotAdmin.ajax_url,
+        method: 'POST',
+        data: {
+            action: 'seedbot_update_product_list',
+            min_price: minPrice,
+            max_price: maxPrice,
+            category: category
+        },
+        success: function(response) {
+            $('#seedbot-product-list').html(response);
+        },
+        error: function() {
+            $('#seedbot-product-list').html('<p>An error occurred while updating the product list.</p>');
+        }
+    });
+}
 });
