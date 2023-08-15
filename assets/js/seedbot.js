@@ -3,7 +3,7 @@ jQuery(document).ready(function ($) {
     $('#seedbot-test-api').on('click', function () {
         const apiKey = $('input[name="seedbot_api_key"]').val();
         $.ajax({
-            url: 'https://api.openai.com/v1/engines',
+            url: 'https://api.openai.com/v1/chat/completions',
             type: 'GET',
             headers: {
                 'Authorization': `Bearer ${apiKey}`,
