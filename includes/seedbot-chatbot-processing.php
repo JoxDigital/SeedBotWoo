@@ -1,7 +1,7 @@
 <?php
 // Include WordPress core
 define('WP_USE_THEMES', false);
-require_once('../../../wp-load.php');
+require_once(ABSPATH . 'wp-load.php'); 
 
 // Get the user message
 $user_message = isset($_POST['message']) ? sanitize_text_field($_POST['message']) : '';
