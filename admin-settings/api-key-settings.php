@@ -64,7 +64,7 @@ function seedbot_enqueue_admin_scripts() {
     // Pass the AJAX URL to the script
     wp_localize_script('seedbot-admin-script', 'seedbotAdmin', array(
         'ajax_url' => admin_url('admin-ajax.php'),
-        'api_url' => 'https://api.openai.com/v1/chat/completions' // Replace this with your actual API endpoint
+        'api_url' => 'https://api.openai.com/v1/engines/davinci-codex/completions' // Replace this with your actual API endpoint
     ));
     
 }
