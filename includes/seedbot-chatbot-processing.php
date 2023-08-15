@@ -18,7 +18,7 @@ if (!empty($user_message)) {
     $data = array(
         'prompt' => $user_message,
         'max_tokens' => 50, // Adjust as needed
-        'model' => 'davinci-codex' // Use 'davinci-codex' model for chat completions
+        'model' => 'davinci' // Use 'davinci' model for chat completions
     );
 
     // Initialize cURL session
