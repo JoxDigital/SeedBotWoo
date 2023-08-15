@@ -15,7 +15,6 @@ if (!empty($user_message)) {
     $api_url = 'https://api.openai.com/v1/engines/davinci/completions'; // Updated API endpoint
     $payload = json_encode(array(
         'messages' => array(array('role' => 'user', 'content' => $user_message)),
-        'model' => 'gpt-4.0', // Specify the language model
     ));
     
     $ch = curl_init($api_url);
@@ -46,3 +45,4 @@ if (!empty($user_message)) {
     }
 }
 ?>
+
