@@ -63,4 +63,82 @@ jQuery(document).ready(function ($) {
     }
 
     // Add more JavaScript logic for handling the chatbot's responses and other features
+
+        // Function to update the product list
+        function updateProductList() {
+            var minPrice = $('input[name="seedbot_min_price"]').val();
+            var maxPrice = $('input[name="seedbot_max_price"]').val();
+            var category = $('select[name="seedbot_product_category"]').val();
+    
+            $.ajax({
+                type: 'POST',
+                url: seedbotAdmin.ajax_url,
+                data: {
+                    action: 'seedbot_update_product_list', // Create a new AJAX action hook
+                    min_price: minPrice,
+                    max_price: maxPrice,
+                    category: category
+                },
+                success: function(response) {
+                    $('#seedbot-product-list').html(response); // Update the product list content
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log('Error:', textStatus, errorThrown);
+                }
+            });
+        }
+    
+        // Bind updateProductList function to change event of filtering inputs
+        $('input[name="seedbot_min_price"], input[name="seedbot_max_price"], select[name="seedbot_product_category"]').on('change', function() {
+            updateProductList();
+        });
+
+// Add this code to seedbot.php
+add_action('wp_ajax_seedbot_update_product_list', 'seedbot_update_product_list');
+add_action('wp_ajax_nopriv_seedbot_update_product_list', 'seedbot_update_product_list');
+
+function seedbot_update_product_list() {
+    $min_price = intval($_POST['min_price']);
+    $max_price = intval($_POST['max_price']);
+    $category = intval($_POST['category']);
+
+    // Query products based on filtering criteria
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key' => '_price',
+                'value' => array($min_price, $max_price),
+                'type' => 'NUMERIC',
+                'compare' => 'BETWEEN'
+            )
+        )
+    );
+
+    if ($category) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $category
+            )
+        );
+    }
+
+    $products = new WP_Query($args);
+
+    if ($products->have_posts()) {
+        while ($products->have_posts()) {
+            $products->the_post();
+            wc_get_template_part('content', 'product'); // Use WooCommerce template to display product
+        }
+        wp_reset_postdata();
+    } else {
+        echo '<p>No products found.</p>';
+    }
+
+    die(); // Terminate the AJAX request
+}
+
 });
