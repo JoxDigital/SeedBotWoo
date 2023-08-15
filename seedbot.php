@@ -301,3 +301,51 @@ function seedbot_woocommerce_filter() {
 
     wp_die(); // Required to terminate the AJAX request
 }
+
+// Add this code to seedbot.php
+add_action('wp_ajax_seedbot_update_product_list', 'seedbot_update_product_list');
+add_action('wp_ajax_nopriv_seedbot_update_product_list', 'seedbot_update_product_list');
+
+function seedbot_update_product_list() {
+    $min_price = intval($_POST['min_price']);
+    $max_price = intval($_POST['max_price']);
+    $category = intval($_POST['category']);
+
+    // Query products based on filtering criteria
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key' => '_price',
+                'value' => array($min_price, $max_price),
+                'type' => 'NUMERIC',
+                'compare' => 'BETWEEN'
+            )
+        )
+    );
+
+    if ($category) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $category
+            )
+        );
+    }
+
+    $products = new WP_Query($args);
+
+    if ($products->have_posts()) {
+        while ($products->have_posts()) {
+            $products->the_post();
+            wc_get_template_part('content', 'product'); // Use WooCommerce template to display product
+        }
+        wp_reset_postdata();
+    } else {
+        echo '<p>No products found.</p>';
+    }
+
+    die(); // Terminate the AJAX request
+}
