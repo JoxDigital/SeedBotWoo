@@ -13,23 +13,22 @@ if (!empty($user_message)) {
 
     // Make an API request to OpenAI and get the chatbot response
     $api_url = 'https://api.openai.com/v1/engines/davinci/completions'; // Updated API endpoint
-    $payload = json_encode(array(
-        'messages' => array(array('role' => 'system', 'content' => 'You are a helpful assistant.'), array('role' => 'user', 'content' => $user_message)),
+    $response = wp_safe_remote_post($api_url, array(
+        'headers' => array(
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $api_key,
+        ),
+        'body' => wp_json_encode(array(
+            'messages' => array(
+                array('role' => 'system', 'content' => 'You are a helpful assistant.'),
+                array('role' => 'user', 'content' => $user_message)
+            ),
+        )),
     ));
-    
-    $ch = curl_init($api_url);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json',
-        'Authorization: Bearer ' . $api_key,
-    ));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $response = curl_exec($ch);
-    curl_close($ch);
 
-    if ($response !== false) {
-        $response_data = json_decode($response, true);
+    if (!is_wp_error($response)) {
+        $response_body = wp_remote_retrieve_body($response);
+        $response_data = json_decode($response_body, true);
 
         // Debugging: Output the full API response
         var_dump($response_data);
