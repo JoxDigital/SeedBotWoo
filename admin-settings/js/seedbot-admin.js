@@ -3,15 +3,16 @@ jQuery(document).ready(function($) {
         e.preventDefault();
 
         var apiKey = $('input[name="seedbot_api_key"]').val();
-        var apiEndpoint = '<?php echo esc_js($api_url); ?>'; // Get the API endpoint URL from PHP
 
-        console.log('API Endpoint:', apiEndpoint); // Add this line to log the API endpoint
+        // Use the correct action hook and endpoint URL
+        var action = 'seedbot_test_api_connection';
+        var ajaxUrl = seedbotAdmin.ajax_url; // Use the localized variable for AJAX URL
 
         $.ajax({
             type: 'POST',
-            url: ajaxurl, // WordPress AJAX handler URL
+            url: ajaxUrl,
             data: {
-                action: 'seedbot_test_api_connection',
+                action: action,
                 api_key: apiKey
             },
             success: function(response) {
