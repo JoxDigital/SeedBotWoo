@@ -23,4 +23,37 @@ jQuery(document).ready(function($) {
             }
         });
     });
+
+    // Inside jQuery(document).ready(function($) {...});
+
+// WooCommerce product filtering
+function fetchFilteredProducts() {
+    var minPrice = parseInt($('input[name="seedbot_min_price"]').val()) || 0;
+    var maxPrice = parseInt($('input[name="seedbot_max_price"]').val()) || Infinity;
+    var category = $('select[name="seedbot_product_category"]').val();
+
+    $.ajax({
+        type: 'POST',
+        url: seedbotAdmin.woocommerce_ajax_url, // Use WooCommerce AJAX URL
+        data: {
+            action: 'seedbot_woocommerce_filter',
+            min_price: minPrice,
+            max_price: maxPrice,
+            category: category
+        },
+        success: function(response) {
+            $('#seedbot-product-list').html(response);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            console.log('Error: ' + textStatus + ' - ' + errorThrown);
+        }
+    });
+}
+
+// Bind the filter function to change events
+$('input[name="seedbot_min_price"], input[name="seedbot_max_price"], select[name="seedbot_product_category"]').on('change', function() {
+    fetchFilteredProducts();
+});
+
+
 });

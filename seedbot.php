@@ -224,6 +224,13 @@ function seedbot_woocommerce_product_filter_options() {
                 ?>
             </td>
         </tr>
+        <!-- Add a container for the filtered products -->
+        <tr valign="top">
+            <th scope="row">Filtered Products:</th>
+            <td>
+                <div id="seedbot-product-list"></div>
+            </td>
+        </tr>
     </table>
     <?php
 }
@@ -249,3 +256,48 @@ function seedbot_chat_interface_shortcode() {
     return $output;
 }
 add_shortcode('seedbot_chat_interface', 'seedbot_chat_interface_shortcode');
+
+add_action('wp_ajax_seedbot_woocommerce_filter', 'seedbot_woocommerce_filter');
+add_action('wp_ajax_nopriv_seedbot_woocommerce_filter', 'seedbot_woocommerce_filter');
+
+function seedbot_woocommerce_filter() {
+    $min_price = isset($_POST['min_price']) ? intval($_POST['min_price']) : 0;
+    $max_price = isset($_POST['max_price']) ? intval($_POST['max_price']) : PHP_INT_MAX;
+    $category = isset($_POST['category']) ? intval($_POST['category']) : '';
+
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key' => '_price',
+                'value' => array($min_price, $max_price),
+                'compare' => 'BETWEEN',
+                'type' => 'NUMERIC'
+            )
+        )
+    );
+
+    if (!empty($category)) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $category
+            )
+        );
+    }
+
+    $products = new WP_Query($args);
+
+    if ($products->have_posts()) {
+        while ($products->have_posts()) {
+            $products->the_post();
+            wc_get_template_part('content', 'product');
+        }
+    } else {
+        echo '<p>No products found.</p>';
+    }
+
+    wp_die(); // Required to terminate the AJAX request
+}

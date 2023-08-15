@@ -14,6 +14,7 @@ jQuery(document).ready(function ($) {
             },
             error: function () {
                 $('#seedbot-test-response').text('API connection failed.');
+                console.log('API connection has failed! SEEDBOT DOT JS');
             }
         });
     });

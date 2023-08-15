@@ -61,11 +61,17 @@ function seedbot_api_key_field_callback() {
 function seedbot_enqueue_admin_scripts() {
     wp_enqueue_script('jquery');
     wp_enqueue_script('seedbot-admin-script', plugin_dir_url(__FILE__) . 'js/seedbot-admin.js', array('jquery'), '1.0', true);
-    // Pass the AJAX URL to the script
+
+    // Enqueue WooCommerce scripts
+    if (class_exists('WooCommerce')) {
+        wp_enqueue_script('woocommerce');
+    }
+
+    // Pass the AJAX URLs to the script
     wp_localize_script('seedbot-admin-script', 'seedbotAdmin', array(
         'ajax_url' => admin_url('admin-ajax.php'),
-        'api_url' => 'https://api.openai.com/v1/engines/davinci-codex/completions' // Replace this with your actual API endpoint
+        'woocommerce_ajax_url' => admin_url('admin-ajax.php') . '?action=seedbot_woocommerce_filter'
     ));
-    
 }
+
 add_action('admin_enqueue_scripts', 'seedbot_enqueue_admin_scripts');
