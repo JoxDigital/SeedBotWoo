@@ -12,9 +12,6 @@ if (!empty($user_message)) {
     $api_key = get_option('seedbot_api_key'); // Make sure you have a function to retrieve the API key
 
     // Make an API request to OpenAI and get the chatbot response
-    // Replace this with your actual API request code
-
-    // For example:
     $api_url = 'https://api.openai.com/v1/chat/completions';
     $response = wp_safe_remote_post($api_url, array(
         'headers' => array(
@@ -22,8 +19,10 @@ if (!empty($user_message)) {
         ),
         'body' => json_encode(array(
             'messages' => array(array('role' => 'user', 'content' => $user_message)),
+            'model' => 'gpt-4.0', // Specify the language model
         )),
     ));
+    
 
     if (!is_wp_error($response)) {
         $response_body = wp_remote_retrieve_body($response);
