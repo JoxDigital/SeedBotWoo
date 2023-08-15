@@ -43,5 +43,5 @@ if (!empty($user_message)) {
     } else {
         echo 'Chatbot encountered an error.';
     }
-
+}
 ?>
