@@ -14,12 +14,12 @@ jQuery(document).ready(function ($) {
             },
             error: function () {
                 $('#seedbot-test-response').text('API connection failed.');
-                console.log('API connection has failed! SEEDBOT DOT JS');
+                console.log('API connection has failed!');
             }
         });
     });
 
-    // Function to update the product list
+// Function to update the product list
     function updateProductList() {
         var minPrice = $('input[name="seedbot_min_price"]').val();
         var maxPrice = $('input[name="seedbot_max_price"]').val();
@@ -27,9 +27,9 @@ jQuery(document).ready(function ($) {
 
         $.ajax({
             type: 'POST',
-            url: seedbotAdmin.ajax_url,
+            url: seedbotFrontend.ajax_url,
             data: {
-                action: 'seedbot_update_product_list', // Create a new AJAX action hook
+                action: 'seedbot_update_product_list', // AJAX action for updating product list
                 min_price: minPrice,
                 max_price: maxPrice,
                 category: category
@@ -60,7 +60,7 @@ jQuery(document).ready(function ($) {
 
             // Send user message to the backend for processing
             $.ajax({
-                url: seedbotAdmin.ajax_url,
+                url: seedbotFrontend.ajax_url,
                 type: 'POST',
                 data: { message: userMessage },
                 success: function (response) {

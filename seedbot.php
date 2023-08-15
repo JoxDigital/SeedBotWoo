@@ -16,22 +16,22 @@ function seedbot_enqueue_scripts() {
 
     // Enqueue SeedBot script
     wp_enqueue_script('seedbot-script', plugin_dir_url(__FILE__) . 'assets/js/seedbot.js', array('jquery'), '1.0', true);
-    wp_enqueue_script('seedbot-admin-script', plugin_dir_url(__FILE__) . 'js/seedbot-admin.js', array('jquery'), '1.0', true);
 
     // Localize the script with the API URL
-    wp_localize_script('seedbot-admin-script', 'seedbotAdmin', array(
+    wp_localize_script('seedbot-script', 'seedbotFrontend', array(
         'ajax_url' => admin_url('admin-ajax.php')
     ));
+
+    // Note: You might need to enqueue additional scripts here if required.
 }
 add_action('wp_enqueue_scripts', 'seedbot_enqueue_scripts');
 
-// Include admin settings pages toa com
+// Include admin settings pages and other components
 require_once plugin_dir_path(__FILE__) . 'admin-settings/api-key-settings.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/woocommerce-options.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/bot-styling.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings/performance-analytics.php';
 require_once plugin_dir_path(__FILE__) . 'includes/seedbot-shortcode.php';
-// require_once plugin_dir_path(__FILE__) . 'includes/seedbot-chat-interface.php';
 require_once plugin_dir_path(__FILE__) . 'includes/seedbot-chatbot-processing.php';
 
 
@@ -259,6 +259,7 @@ function seedbot_chat_interface_shortcode() {
 }
 add_shortcode('seedbot_chat_interface', 'seedbot_chat_interface_shortcode');
 
+
 add_action('wp_ajax_seedbot_woocommerce_filter', 'seedbot_woocommerce_filter');
 add_action('wp_ajax_nopriv_seedbot_woocommerce_filter', 'seedbot_woocommerce_filter');
 
@@ -304,7 +305,7 @@ function seedbot_woocommerce_filter() {
     wp_die(); // Required to terminate the AJAX request
 }
 
-// Add this code to seedbot.php
+// AJAX action for updating product list
 add_action('wp_ajax_seedbot_update_product_list', 'seedbot_update_product_list');
 add_action('wp_ajax_nopriv_seedbot_update_product_list', 'seedbot_update_product_list');
 
@@ -351,3 +352,7 @@ function seedbot_update_product_list() {
 
     die(); // Terminate the AJAX request
 }
+
+wp_localize_script('seedbot-script', 'seedbotFrontend', array(
+    'ajax_url' => admin_url('admin-ajax.php')
+));
