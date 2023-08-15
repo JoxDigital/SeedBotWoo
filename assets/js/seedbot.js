@@ -27,13 +27,32 @@ jQuery(document).ready(function ($) {
         const userMessage = userMessageInput.value;
         if (userMessage.trim() !== '') {
             appendUserMessage(userMessage);
+    
             // Send user message to the backend for processing
-            // ...
-            // Receive and append the chatbot's response
-            // ...
+            $.ajax({
+                url: 'your-backend-processing-url', // Replace with your actual backend URL
+                type: 'POST',
+                data: { message: userMessage },
+                success: function (response) {
+                    appendChatbotMessage(response); // Append chatbot's response
+                },
+                error: function () {
+                    // Handle error if the backend request fails
+                }
+            });
+    
+            // Clear user input
+            userMessageInput.value = '';
         }
     });
-
+    
+    function appendChatbotMessage(message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('seedbot-chatbot-message');
+        messageElement.textContent = message;
+        chatMessages.appendChild(messageElement);
+    }
+    
     function appendUserMessage(message) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('seedbot-user-message');
