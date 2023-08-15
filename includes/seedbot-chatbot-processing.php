@@ -17,7 +17,7 @@ if (!empty($user_message)) {
     // Prepare the data for the API request
     $data = array(
         'prompt' => $user_message,
-        'max_tokens' => 350, // Adjust as needed
+        'max_tokens' => 50, // Adjust as needed
         'model' => 'davinci' // Use 'davinci' model for chat completions
     );
 
@@ -38,12 +38,9 @@ if (!empty($user_message)) {
 
     // Check for cURL errors
     if (curl_errno($ch)) {
-        echo 'CURL Error: ' . curl_error($ch);
+        echo 'Chatbot encountered an issue.';
     } else {
         $response_data = json_decode($response, true);
-
-        // Debugging: Output the full API response
-        var_dump($response_data);
 
         // Extract the chatbot's reply from the response and return it
         $chatbot_reply = isset($response_data['choices'][0]['text'])
@@ -59,4 +56,3 @@ if (!empty($user_message)) {
     echo 'No message provided.';
 }
 ?>
-
