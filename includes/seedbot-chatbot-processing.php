@@ -19,7 +19,7 @@ if (!empty($user_message)) {
         ),
         'body' => json_encode(array(
             'messages' => array(array('role' => 'user', 'content' => $user_message)),
-            'model' => 'gpt-4.0', // Specify the language model
+            'model' => 'gpt-3.5-turbo', // Specify the language model
         )),
     ));
     
