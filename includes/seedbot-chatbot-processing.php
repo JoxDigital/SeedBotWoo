@@ -12,14 +12,15 @@ if (!empty($user_message)) {
     $api_key = get_option('seedbot_api_key'); // Make sure you have a function to retrieve the API key
 
     // API endpoint
-    $api_url = 'https://api.openai.com/v1/engines/davinci/completions'; // Updated API endpoint
+    $api_url = 'https://api.openai.com/v1/chat/completions';
 
     // Prepare the data for the API request
     $data = array(
         'messages' => array(
-            array('role' => 'system', 'content' => 'You are a helpful assistant.'),
             array('role' => 'user', 'content' => $user_message)
-        )
+        ),
+        'model' => 'davinci', // Use 'davinci' model for chat completions
+        'max_tokens' => 50 // Adjust as needed
     );
 
     // Initialize cURL session
