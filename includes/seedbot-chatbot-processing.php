@@ -17,7 +17,7 @@ if (!empty($user_message)) {
     // Prepare the data for the API request
     $data = array(
         'prompt' => $user_message,
-        'max_tokens' => 50, // Adjust as needed
+        'max_tokens' => 350, // Adjust as needed
         'model' => 'davinci' // Use 'davinci' model for chat completions
     );
 
