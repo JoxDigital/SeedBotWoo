@@ -1,3 +1,5 @@
+includes/seedbot-chatbot-processing.php
+
 <?php
 // Include WordPress core
 define('WP_USE_THEMES', false);
@@ -28,22 +30,18 @@ if (!empty($user_message)) {
     if (!is_wp_error($response)) {
         $response_body = wp_remote_retrieve_body($response);
         $response_data = json_decode($response_body, true);
-
+    
+        // Debugging: Output the full API response
+        var_dump($response_data);
+    
         // Extract the chatbot's reply from the response and return it
         $chatbot_reply = isset($response_data['choices'][0]['message']['content'])
             ? $response_data['choices'][0]['message']['content']
             : 'Chatbot encountered an issue.';
-
+    
         echo $chatbot_reply;
     } else {
         echo 'Chatbot encountered an error.';
     }
-} else {
-    echo 'No message provided.';
-}
-
-function get_seedbot_api_key() {
-    return get_option('seedbot_api_key');
-}
 
 ?>
