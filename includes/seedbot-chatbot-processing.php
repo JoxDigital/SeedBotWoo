@@ -18,6 +18,7 @@ if (!empty($user_message)) {
     $data = array(
         'prompt' => $user_message,
         'max_tokens' => 50, // Adjust as needed
+        'temperature' => 0.5, // Adjust to control randomness (0.2 for more focused, 0.8 for more random)
         'model' => 'davinci' // Use 'davinci' model for chat completions
     );
 
@@ -38,9 +39,12 @@ if (!empty($user_message)) {
 
     // Check for cURL errors
     if (curl_errno($ch)) {
-        echo 'Chatbot encountered an issue.';
+        echo 'CURL Error: ' . curl_error($ch);
     } else {
         $response_data = json_decode($response, true);
+
+        // Debugging: Output the full API response
+        var_dump($response_data);
 
         // Extract the chatbot's reply from the response and return it
         $chatbot_reply = isset($response_data['choices'][0]['text'])
