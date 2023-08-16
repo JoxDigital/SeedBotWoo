@@ -27,3 +27,5 @@ It gives responses that look like this.
  == [15:34:00] <Weasel> a1sherlappa: ok lanski <Weasel> thats a great idea ial+ <Weasel> how about you do that <We0
 
  can we get more meaningful responses?
+
+ can i get something today? I just bought 50bop data. 
