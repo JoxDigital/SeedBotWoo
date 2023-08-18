@@ -1,69 +1,39 @@
-#seedbot-chat-interface {
-    background-color: #d0e8d5;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-#seedbot-chat-container {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    max-height: 400px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-    position: absolute;
-    left: 30px;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
+/* Adjustments to Header */
 #seedbot-chat-header {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     background-color: #1b3863; /* Dark Blue */
     color: #f0f0f0; /* Light Text */
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 10px;
-    align-items: center;
-}
-
-#seedbot-title {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
 }
 
 #seedbot-avatar img {
-    width: 50px;
+    width: calc(1/6 * 100%); /* Avatar takes up 1/6th of the header width */
+    max-width: 50px;
     aspect-ratio: 1/1;
     margin-right: 10px;
 }
 
-#seedbot-name {
+#seedbot-chat-header-inner {
     flex: 1;
-}
-
-.seedbot-options {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 10px;
+    align-items: center;
+}
+
+#seedbot-options {
+    display: flex;
 }
 
 .seedbot-option {
-    flex: 1 1 45%;
     background-color: #6b8e6b; /* Dark Green */
     color: #f0f0f0; /* Light Text */
     border-radius: 10px;
     padding: 10px;
-    margin: 10px;
+    margin: 0 5px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -71,34 +41,24 @@
     transition: background-color 0.3s ease;
 }
 
-.seedbot-option svg {
-    width: 24px;
-    height: 24px;
-    margin-right: 5px;
+.seedbot-option:first-child {
+    flex: 0 0 calc(1/6 * 100%); /* Take up 1/6th of the width */
 }
 
+.seedbot-option:nth-child(2) {
+    flex: 1; /* Fill remaining space */
+}
+
+/* Apply hover effect to options */
 .seedbot-option:hover {
     background-color: #8faea4; /* Lighter Green */
 }
 
-.seedbot-input-container {
-    display: flex;
-    padding: 3px;
-    flex-direction: column;
-}
-
-.seedbot-chat-messages {
-    margin-bottom: 10px;
-    background-image: url('path-to-your-pattern-image'); /* Add your pattern image */
-    padding: 10px;
-    border-radius: 5px;
-    overflow-y: auto;
-    flex: 1;
-}
-
+/* Align input and button */
 .seedbot-user-input {
     display: flex;
     margin-top: 10px;
+    align-items: center;
 }
 
 #seedbot-user-message {
