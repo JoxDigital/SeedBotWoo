@@ -77,3 +77,68 @@
     border-radius: 5px;
     cursor: pointer;
 }
+/* ... (previous CSS rules) */
+
+#seedbot-chat-header {
+    display: flex;
+    flex-direction: row;
+    background-color: #1b3863; /* Dark Blue */
+    color: #f0f0f0; /* Light Text */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+    align-items: center;
+}
+
+#seedbot-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#seedbot-avatar img {
+    width: 50px;
+    aspect-ratio: 1/1;
+    margin-right: 10px;
+}
+
+#seedbot-toggle-button {
+    background-color: transparent;
+    border: none;
+    width: 24px;
+    height: 24px;
+    background-image: url('path-to-chevron-image'); /* Add your chevron image */
+    background-size: cover;
+    cursor: pointer;
+}
+
+.seedbot-chat-messages {
+    margin-bottom: 10px;
+    background-image: url('path-to-your-pattern-image'); /* Add your pattern image */
+    padding: 10px;
+    border-radius: 5px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Add styles for the horizontal tabs */
+.seedbot-tabs {
+    display: flex;
+    justify-content: space-between;
+    background-color: #6b52af; /* Purple */
+    border-bottom: 2px solid #fff;
+    padding: 8px 0;
+}
+
+.seedbot-tab {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.seedbot-active-tab {
+    background-color: #ff7f50; /* Orange */
+}
+
