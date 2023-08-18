@@ -93,3 +93,24 @@ jQuery(document).ready(function ($) {
 
     // Add more JavaScript logic for handling the chatbot's responses and other features
 });
+// ... (previous JavaScript code)
+
+// Add an event listener to the Toggle button
+const toggleButton = document.getElementById('seedbot-toggle-button');
+toggleButton.addEventListener('click', function () {
+    // Toggle the visibility of the chat container
+    const chatContainer = document.getElementById('seedbot-chat-container');
+    chatContainer.classList.toggle('seedbot-hidden');
+});
+
+// Add an event listener to the tabs
+const tabs = document.querySelectorAll('.seedbot-tab');
+tabs.forEach(tab => {
+    tab.addEventListener('click', function () {
+        // Toggle active tab
+        tabs.forEach(t => t.classList.remove('seedbot-active-tab'));
+        tab.classList.add('seedbot-active-tab');
+
+        // Implement logic to switch tab content
+    });
+});
