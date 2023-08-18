@@ -4,26 +4,19 @@
 // Start output buffering to capture any output
 ob_start();
 ?>
-
 <div id="seedbot-chat-interface" class="seedbot-chat-interface">
     <div id="seedbot-chat-container" class="seedbot-chat-container">
         <div class="seedbot-chat-header" id="seedbot-chat-header">
             <div id="seedbot-avatar" class="seedbot-avatar">
                 <img src="https://dev.joxdigital.com/wp-content/uploads/2023/08/seedbotavatar-scaled-1.png" alt="ChatBot Avatar"/>
             </div>
-            <div id="seedbot-chat-header-inner">
-                <div id="seedbot-title-container">
-                    <div id="seedbot-title">
-                        <div id="seedbot-name">
-                            <h3>SeedBot GPT-4</h3>
-                            <p>Seedconnect's AI Customer Assistant</p>
-                        </div>
-                    </div>
+            <div id="seedbot-header-content">
+                <div id="seedbot-title">
+                    <h3>SeedBot GPT-4</h3>
+                    <!-- Toggle button -->
+                    <button id="seedbot-toggle-button" class="seedbot-toggle-button"></button>
                 </div>
-                <div id="seedbot-options" class="seedbot-options">
-                    <div class="seedbot-option">Products</div>
-                    <div class="seedbot-option">Orders</div>
-                </div>
+                <!-- Remove the <p> tag below the title -->
             </div>
         </div>
         <div class="seedbot-chat-messages" id="seedbot-chat-messages">
@@ -40,7 +33,6 @@ ob_start();
         </div>
     </div>
 </div>
-
 
 <?php
 // Get the buffered content and send it to the browser
